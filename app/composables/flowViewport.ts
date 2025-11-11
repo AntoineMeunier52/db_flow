@@ -1,8 +1,12 @@
+import { isFunctionOrConstructorTypeNode } from "typescript";
+
 export const useFlowViewport = () => {
   const viewportTransform = useState<ViewportTransform>(
     "viewportTransform",
     () => ({ x: 0, y: 0, zoom: 1 })
   );
+
+  const isClick = ref(false);
 
   // update zoom and viewport position based on wheel event
   function handleZoom(
@@ -41,5 +45,15 @@ export const useFlowViewport = () => {
     viewportTransform.value.zoom = newZoom;
   }
 
-  return { viewportTransform, handleZoom };
+  const setClick = () => (isClick.value = true);
+  const unsetClick = () => (isClick.value = false);
+
+  function handleDrag(event: MouseEvent) {
+    if (!isClick.value) return;
+
+    viewportTransform.value.x += event.movementX;
+    viewportTransform.value.y += event.movementY;
+  }
+
+  return { viewportTransform, handleZoom, handleDrag, setClick, unsetClick };
 };
