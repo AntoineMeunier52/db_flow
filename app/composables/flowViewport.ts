@@ -7,7 +7,7 @@ export const useFlowViewport = () => {
   // update zoom and viewport position based on wheel event
   function handleZoom(
     event: WheelEvent,
-    minZoom = 0.1,
+    minZoom = 1,
     maxZoom = 4,
     zoomSpeed = 0.05
   ) {

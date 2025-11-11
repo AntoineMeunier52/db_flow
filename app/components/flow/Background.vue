@@ -12,8 +12,8 @@
           id="flow-background"
           :x="viewportTransform.x % background.scaledGap[0]"
           :y="viewportTransform.y % background.scaledGap[1]"
-          width="20"
-          height="20"
+          :width="background.scaledGap[0]"
+          :height="background.scaledGap[1]"
           patternUnits="userSpaceOnUse"
           :patternTransform="`translate(-${background.offset[0]}, -${background.offset[1]})`"
         >
@@ -71,6 +71,10 @@ const {
   lineWidth = 1,
 } = defineProps<BackgroundProps>();
 
+/**
+ * Logic taken from
+ * https://github.com/bcakmakoglu/vue-flow/blob/master/packages/background/src/Background.vue
+ */
 const background = computed(() => {
   const zoom = viewportTransform.value.zoom;
 
@@ -82,8 +86,8 @@ const background = computed(() => {
     : [offset, offset];
 
   const scaledOffset: [number, number] = [
-    offsetX * zoom || 1 + scaledGap[0] / 2,
-    offsetY * zoom || 1 + scaledGap[1] / 2,
+    offsetX! * zoom || 1 + scaledGap[0] / 2,
+    offsetY! * zoom || 1 + scaledGap[1] / 2,
   ];
 
   const scaledSize = size * zoom;
