@@ -10,8 +10,8 @@
       <slot id="flow-background" name="pattern-container">
         <pattern
           id="flow-background"
-          x="1"
-          y="1"
+          :x="viewportTransform.x % background.scaledGap[0]"
+          :y="viewportTransform.y % background.scaledGap[1]"
           width="20"
           height="20"
           patternUnits="userSpaceOnUse"
@@ -24,7 +24,7 @@
               <circle
                 :cx="background.size / 2"
                 :cy="background.size / 2"
-                :r="background.dotRadius / 2"
+                :r="background.size / 2"
                 :fill="patternColor"
               />
             </template>
@@ -69,14 +69,14 @@ const {
   bgColor = "#fff",
   offset = 0,
   lineWidth = 1,
-  dotRadius = 1,
 } = defineProps<BackgroundProps>();
 
 const background = computed(() => {
-  const zoom = viewportTransform.value.zoom; //later report the vieport zoom here
+  const zoom = viewportTransform.value.zoom;
+
   const [gapX, gapY] = Array.isArray(gap) ? gap : [gap, gap];
-  const scaledGap: [number, number] = [gapX! * zoom || 1, gapY! * zoom || 1];
-  const scaledSize = size * zoom;
+  const scaledGap: [number, number] = [gapX! * zoom, gapY! * zoom];
+
   const [offsetX, offsetY]: [number, number] = Array.isArray(offset)
     ? offset
     : [offset, offset];
@@ -86,13 +86,12 @@ const background = computed(() => {
     offsetY * zoom || 1 + scaledGap[1] / 2,
   ];
 
-  const dotRadiusSize = dotRadius * scaledSize;
+  const scaledSize = size * zoom;
 
   return {
     scaledGap,
     offset: scaledOffset,
     size: scaledSize,
-    dotRadius: dotRadiusSize,
   };
 });
 
