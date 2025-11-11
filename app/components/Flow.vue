@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full">
+  <div class="relative h-full w-full overflow-hidden z-0 direction-ltr">
     <flow-viewport>
       <slot name="zoomable-pane" />
     </flow-viewport>

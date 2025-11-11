@@ -11,6 +11,15 @@ export interface FlowTransform extends XYZPosition {
   scale: number;
 }
 
+export interface Translate {
+  x: number;
+  y: number;
+}
+
+export interface ViewportTransform extends Translate {
+  zoom: number;
+}
+
 export enum Position {
   TOP = "top",
   TOP_MIDDLE = "top-middle",

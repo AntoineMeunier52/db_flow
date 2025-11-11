@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="absolute top-0 left-0 z-0"
     :style="{
       height: `${height > 100 ? 100 : height}%`,
       width: `${width > 100 ? 100 : width}%`,
@@ -53,6 +54,8 @@ import type {
   BackgroundVariant,
 } from "~~/shared/types/Background";
 
+const { viewportTransform } = useFlowViewport();
+
 //from v3.4 descructure is enable to define defaults value
 const {
   variant = "dots",
@@ -70,7 +73,7 @@ const {
 } = defineProps<BackgroundProps>();
 
 const background = computed(() => {
-  const zoom = 1; //later report the vieport zoom here
+  const zoom = viewportTransform.value.zoom; //later report the vieport zoom here
   const [gapX, gapY] = Array.isArray(gap) ? gap : [gap, gap];
   const scaledGap: [number, number] = [gapX! * zoom || 1, gapY! * zoom || 1];
   const scaledSize = size * zoom;
