@@ -12,7 +12,7 @@ export const useFlowViewport = () => {
   function handleZoom(
     event: WheelEvent,
     minZoom = 1,
-    maxZoom = 4,
+    maxZoom = 3,
     zoomSpeed = 0.05
   ) {
     event.preventDefault();

@@ -21,12 +21,12 @@ export interface ViewportTransform extends Translate {
 }
 
 export enum Position {
+  CORNER_TOP_LEFT = "corner-top-left",
   TOP = "top",
-  TOP_MIDDLE = "top-middle",
+  CORNER_TOP_RIGHT = "corner-top-right",
   RIGHT = "right",
-  RIGHT_MIDDLE = "right-middle",
+  CORNER_BOTTOM_RIGHT = "corner-bottom-right",
   BOTTOM = "bottom",
-  BOTTOM_MIDDLE = "bottom-middle",
+  CORNER_BOTTOM_LEFT = "corner-bottom-left",
   LEFT = "left",
-  LEFT_MIDDLE = "left-middle",
 }
