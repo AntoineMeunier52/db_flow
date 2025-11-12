@@ -55,5 +55,12 @@ export const useFlowViewport = () => {
     viewportTransform.value.y += event.movementY;
   }
 
-  return { viewportTransform, handleZoom, handleDrag, setClick, unsetClick };
+  return {
+    viewportTransform,
+    handleZoom,
+    handleDrag,
+    setClick,
+    unsetClick,
+    isClick,
+  };
 };
